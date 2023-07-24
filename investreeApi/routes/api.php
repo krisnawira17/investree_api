@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [App\Http\Controllers\UserController::class, 'register']);
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
-     
-Route::middleware('auth:api')->group( function () {
-    Route::resource('post', App\Http\Controllers\PostController::class);
+
+Route::prefix('v1')->group(function () {
+    Route::middleware('auth:api')->group( function () {
+        Route::resource('post', App\Http\Controllers\PostController::class);
+    });
 });
+

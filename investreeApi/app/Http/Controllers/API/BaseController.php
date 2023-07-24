@@ -11,11 +11,25 @@ class BaseController extends Controller
     {
     	$response = [
             'success' => true,
-            'data'    => $result,
+            'data'    => $result->items(),
             'message' => $message,
         ];
-        return response()->json($response, 200);
+
+        if ($result instanceof LengthAwarePaginator) {
+            $response['pagination'] = [
+                'total' => $result->total(),
+                'per_page' => $result->perPage(),
+                'current_page' => $result->currentPage(),
+                'last_page' => $result->lastPage(),
+                'from' => $result->firstItem(),
+                'to' => $result->lastItem(),
+            ];
+        }
+
+        return response()->json($response, 200); 
     }
+
+    
 
     public function sendError($error, $errorMessages = [], $code = 404)
     {

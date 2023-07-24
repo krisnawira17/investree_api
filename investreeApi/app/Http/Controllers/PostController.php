@@ -18,7 +18,7 @@ class PostController extends BaseController
      */
     public function index() : JsonResponse
     {
-        $post = Post::all();
+        $post = Post::paginate(5);
 
         return $this->sendResponse(PostResource::collection($post), 'Post retrieved succesfully');
     }
