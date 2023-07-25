@@ -11,7 +11,7 @@ class BaseController extends Controller
     {
     	$response = [
             'success' => true,
-            'data'    => $result->items(),
+            'data'    => $result,
             'message' => $message,
         ];
 
@@ -25,8 +25,8 @@ class BaseController extends Controller
                 'to' => $result->lastItem(),
             ];
         }
-
         return response()->json($response, 200); 
+
     }
 
     
